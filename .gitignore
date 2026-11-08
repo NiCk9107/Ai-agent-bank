@@ -1,0 +1,28 @@
+# Секреты и ключи — никогда не коммитим
+.env
+
+# Виртуальное окружение Python
+.venv/
+venv/
+
+# Кэш Python и тестов
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# База данных и логи — это данные, а не код
+db/*.db
+db/*.sqlite
+*.log
+
+# Сгенерированные картинки и отчёты (появятся на этапах 2 и 6)
+charts/output/
+backtest/reports/*.png
+
+# Настройки IDE
+.vscode/
+.idea/
+
+# Мусор ОС
+.DS_Store
+Thumbs.db

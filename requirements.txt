@@ -1,0 +1,7 @@
+pandas
+numpy
+httpx
+SQLAlchemy
+APScheduler
+python-dotenv
+tzdata
