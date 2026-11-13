@@ -5,3 +5,6 @@ SQLAlchemy
 APScheduler
 python-dotenv
 tzdata
+pytest
+mplfinance
+six

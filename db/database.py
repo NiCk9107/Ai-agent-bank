@@ -3,7 +3,9 @@ import time
 from datetime import datetime, date, time as dt_time
 from pathlib import Path
 
-from sqlalchemy import create_engine, func, select
+import pandas as pd
+
+from sqlalchemy import create_engine, func, select, text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.sqlite import insert
 
@@ -216,3 +218,15 @@ def save_macro(key_rate: float | None = None, usdrub: float | None = None, brent
             )
         )
         session.commit()
+def get_candles_df(ticker: str, timeframe: str = "1D", since=None) -> pd.DataFrame:
+    """Свечи тикера из БД в виде DataFrame, отсортированные по времени."""
+    query = text(
+        "SELECT ts, open, high, low, close, volume "
+        "FROM candles WHERE ticker = :t AND timeframe = :tf "
+        "ORDER BY ts"
+    )
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn, params={"t": ticker, "tf": timeframe})
+    if not df.empty:
+        df["ts"] = pd.to_datetime(df["ts"])
+    return df
